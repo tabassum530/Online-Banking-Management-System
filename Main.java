@@ -1,9 +1,9 @@
 import java.util.*;
 
 // ======================= ACCOUNT =======================
-abstract class Account {   // 🔴 ABSTRACTION: abstract class
+abstract class Account {   //  ABSTRACTION: abstract class
 
-    private int accNo;     // 🔴 ENCAPSULATION: data hiding (private)
+    private int accNo;     //  ENCAPSULATION: data hiding (private)
     private String name;
     private String email;
     private String pin;
@@ -20,12 +20,12 @@ abstract class Account {   // 🔴 ABSTRACTION: abstract class
         this.history = new ArrayList<>();
     }
 
-    // 🔴 ENCAPSULATION: controlled access via getters
+    //  ENCAPSULATION: controlled access via getters
     public int getAccNo() { return accNo; }
     public String getName() { return name; }
     public double getBalance() { return balance; }
 
-    public boolean checkPin(String inputPin) {  // 🔴 ENCAPSULATION: secure access
+    public boolean checkPin(String inputPin) {  //  ENCAPSULATION: secure access
         return this.pin.equals(inputPin);
     }
 
@@ -50,7 +50,7 @@ abstract class Account {   // 🔴 ABSTRACTION: abstract class
         return true;
     }
 
-    // 🔴 POLYMORPHISM SUPPORT (used differently in transfer)
+    //  POLYMORPHISM SUPPORT (used differently in transfer)
     public boolean withdrawSilent(double amount) {
         if (amount <= 0 || amount > balance) return false;
         balance -= amount;
@@ -73,35 +73,35 @@ abstract class Account {   // 🔴 ABSTRACTION: abstract class
         }
     }
 
-    public abstract void accountType();  // 🔴 ABSTRACTION: abstract method
+    public abstract void accountType();  //  ABSTRACTION: abstract method
 }
 
 // ======================= SAVINGS =======================
-class SavingsAccount extends Account {   // 🔴 INHERITANCE
+class SavingsAccount extends Account {   //  INHERITANCE
 
     public SavingsAccount(int accNo, String name, String email, String pin, double balance) {
         super(accNo, name, email, pin, balance);
     }
 
-    public void accountType() {   // 🔴 POLYMORPHISM (method overriding)
+    public void accountType() {   //  POLYMORPHISM (method overriding)
         System.out.println("Savings Account");
     }
 }
 
 // ======================= CURRENT =======================
-class CurrentAccount extends Account {   // 🔴 INHERITANCE
+class CurrentAccount extends Account {   //  INHERITANCE
 
     public CurrentAccount(int accNo, String name, String email, String pin, double balance) {
         super(accNo, name, email, pin, balance);
     }
 
-    public void accountType() {   // 🔴 POLYMORPHISM
+    public void accountType() {   // POLYMORPHISM
         System.out.println("Current Account");
     }
 }
 
 // ======================= FDR =======================
-class FDRAccount extends Account {   // 🔴 INHERITANCE
+class FDRAccount extends Account {   // INHERITANCE
 
     private double interestRate = 0.08;
 
@@ -157,7 +157,7 @@ class Bank {
             return;
         }
 
-        // 🔴 POLYMORPHISM: Account reference, different object behavior at runtime
+        //  POLYMORPHISM: Account reference, different object behavior at runtime
         if (sender.withdrawSilent(amount)) {
             receiver.depositSilent(amount);
             System.out.println("Transfer successful");
@@ -173,7 +173,7 @@ class Bank {
         }
 
         for (Account a : accounts) {
-            a.accountType();   // 🔴 POLYMORPHISM (runtime decision)
+            a.accountType();   // POLYMORPHISM (runtime decision)
             System.out.println("Acc No: " + a.getAccNo());
             System.out.println("Name: " + a.getName());
             System.out.println("Balance: " + a.getBalance());
@@ -286,7 +286,7 @@ public class Main {
                             } else if (op == 5) {
                                 user.showHistory();
                             } else if (op == 6) {
-                                if (user instanceof FDRAccount) {  // 🔴 POLYMORPHISM check
+                                if (user instanceof FDRAccount) {  //  POLYMORPHISM check
                                     System.out.print("Years: ");
                                     int y = sc.nextInt();
                                     ((FDRAccount) user).calculateInterest(y);
